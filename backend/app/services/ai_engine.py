@@ -25,10 +25,10 @@ Do NOT include <html>, <head>, or <body> tags - just the content HTML."""
 
 def generate_summary(data_summary: dict) -> str:
     """Generate an AI-powered sales summary using Google Gemini.
-    
+
     Args:
         data_summary: Parsed data summary from the parser service.
-    
+
     Returns:
         HTML-formatted executive summary string.
     """
@@ -43,20 +43,20 @@ def generate_summary(data_summary: dict) -> str:
     prompt = f"""Analyze the following sales data and generate a professional executive brief.
 
 DATA SUMMARY:
-- File: {data_summary.get('filename', 'Unknown')}
-- Total Rows: {data_summary.get('total_rows', 0)}
-- Columns: {', '.join(data_summary.get('columns', []))}
+- File: {data_summary.get("filename", "Unknown")}
+- Total Rows: {data_summary.get("total_rows", 0)}
+- Columns: {", ".join(data_summary.get("columns", []))}
 
 SAMPLE DATA:
-{json.dumps(data_summary.get('sample_rows', []), indent=2, default=str)}
+{json.dumps(data_summary.get("sample_rows", []), indent=2, default=str)}
 
 STATISTICS:
-{json.dumps(data_summary.get('statistics', {}), indent=2, default=str)}
+{json.dumps(data_summary.get("statistics", {}), indent=2, default=str)}
 
 TOTALS:
-- Total Revenue: ${data_summary.get('total_revenue', 'N/A'):,}
-- Total Units Sold: {data_summary.get('total_units_sold', 'N/A'):,}
-- Null/Missing Values: {json.dumps(data_summary.get('null_counts', {}), default=str)}
+- Total Revenue: ${data_summary.get("total_revenue", "N/A"):,}
+- Total Units Sold: {data_summary.get("total_units_sold", "N/A"):,}
+- Null/Missing Values: {json.dumps(data_summary.get("null_counts", {}), default=str)}
 
 Generate a comprehensive, professional executive brief in HTML format."""
 
@@ -72,10 +72,10 @@ Generate a comprehensive, professional executive brief in HTML format."""
     except Exception as e:
         # Fallback for strict quota limits on new free tier accounts
         print(f"Gemini API Quota Error: {e} - Falling back to mock data generator.")
-        filename = data_summary.get('filename', 'Unknown')
-        total_rev = data_summary.get('total_revenue', 0)
-        units = data_summary.get('total_units_sold', 0)
-        
+        filename = data_summary.get("filename", "Unknown")
+        total_rev = data_summary.get("total_revenue", 0)
+        units = data_summary.get("total_units_sold", 0)
+
         return f"""
         <h2>Executive Summary</h2>
         <p>This is a system-generated fallback report because the Google Gemini API quota limit (0 requests allowed) was reached for the provided API key.</p>
@@ -85,7 +85,7 @@ Generate a comprehensive, professional executive brief in HTML format."""
         <ul>
             <li><strong>Total Revenue:</strong> ${total_rev:,}</li>
             <li><strong>Total Units Sold:</strong> {units:,}</li>
-            <li><strong>Data Volume:</strong> {data_summary.get('total_rows', 0)} rows analyzed successfully</li>
+            <li><strong>Data Volume:</strong> {data_summary.get("total_rows", 0)} rows analyzed successfully</li>
         </ul>
         
         <h2>Insights & Recommendations</h2>

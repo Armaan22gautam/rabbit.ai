@@ -6,11 +6,11 @@ import pandas as pd
 
 def parse_file(contents: bytes, filename: str) -> dict:
     """Parse uploaded file into a structured data summary for the AI engine.
-    
+
     Args:
         contents: Raw file bytes.
         filename: Original filename (used for extension detection).
-    
+
     Returns:
         Dictionary with parsed data summary.
     """

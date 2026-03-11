@@ -27,9 +27,7 @@ async def analyze_sales_data(
     file: UploadFile = File(
         ..., description="Sales data file (.csv or .xlsx, max 10 MB)"
     ),
-    email: str = Form(
-        ..., description="Recipient email address for the report"
-    ),
+    email: str = Form(..., description="Recipient email address for the report"),
     api_key: str = Depends(verify_api_key),
 ):
     """
@@ -74,7 +72,9 @@ async def analyze_sales_data(
             "filename": file.filename,
             "rows_analyzed": data_summary["total_rows"],
             "columns": data_summary["columns"],
-            "summary_preview": ai_summary[:500] + "..." if len(ai_summary) > 500 else ai_summary,
+            "summary_preview": ai_summary[:500] + "..."
+            if len(ai_summary) > 500
+            else ai_summary,
         }
 
     except ValueError as e:
@@ -82,4 +82,7 @@ async def analyze_sales_data(
         return {"success": False, "error": str(e)}
     except Exception as e:
         logger.error(f"Processing error: {e}")
-        return {"success": False, "error": f"An error occurred while processing: {str(e)}"}
+        return {
+            "success": False,
+            "error": f"An error occurred while processing: {str(e)}",
+        }

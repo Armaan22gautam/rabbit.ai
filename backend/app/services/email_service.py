@@ -87,7 +87,7 @@ EMAIL_TEMPLATE = """
 
 def send_email(to_email: str, summary_html: str, filename: str) -> None:
     """Send the AI-generated summary via SMTP email.
-    
+
     Args:
         to_email: Recipient email address.
         summary_html: HTML content of the AI summary.

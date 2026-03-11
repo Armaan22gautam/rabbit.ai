@@ -12,11 +12,11 @@ async def verify_api_key(api_key: str = Security(api_key_header)) -> str:
     """Validate API key from request header. Skip if no API_KEY is configured."""
     # Check if a real custom API key requires validation
     configured_key = settings.API_KEY.strip() if settings.API_KEY else ""
-    
+
     # If it's empty or the default template from .env.example, disable auth
     if not configured_key or configured_key == "your_secret_api_key_here":
         return "no-auth"
-        
+
     # If a real key is configured, validate the incoming request
     if not api_key or api_key != configured_key:
         raise HTTPException(
