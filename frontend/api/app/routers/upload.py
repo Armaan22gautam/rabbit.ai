@@ -59,7 +59,7 @@ async def analyze_sales_data(
         logger.info(f"Parsed {data_summary['total_rows']} rows from {file.filename}")
 
         # Step 2: Generate AI summary
-        ai_summary = generate_summary(data_summary)
+        ai_summary = await generate_summary(data_summary)
         logger.info("AI summary generated successfully")
 
         # Step 3: Send email

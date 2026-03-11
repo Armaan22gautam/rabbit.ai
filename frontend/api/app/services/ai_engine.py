@@ -1,93 +1,84 @@
-"""AI Engine: Uses Google Gemini to generate executive sales summaries."""
+"""AI engine service: generates executive summaries using the Gemini REST API."""
 
 import json
-import google.generativeai as genai
+import httpx
+import logging
 from app.config import settings
 
+logger = logging.getLogger(__name__)
 
-def _get_system_prompt() -> str:
-    return """You are an expert business analyst at a Fortune 500 company. 
-Your task is to analyze sales data and generate a professional executive brief.
-
-The brief should include:
-1. **Executive Summary** - A 2-3 sentence high-level overview
-2. **Key Metrics** - Total revenue, units sold, and other important numbers
-3. **Regional Performance** - Breakdown by region
-4. **Product Category Analysis** - Performance by category
-5. **Trends & Insights** - Notable patterns or anomalies
-6. **Recommendations** - 2-3 actionable recommendations
-
-Format the output as clean, professional HTML suitable for an email.
-Use <h2> for section headers, <p> for paragraphs, <ul>/<li> for lists, 
-and <strong> for emphasis. Use a professional tone appropriate for C-suite executives.
-Do NOT include <html>, <head>, or <body> tags - just the content HTML."""
+# Fallback summary in case of API issues
+MOCK_SUMMARY = """
+<h2>Executive Summary</h2>
+<p>This is a system-generated fallback report because the Google Gemini API quota limit was reached or a connection error occurred.</p>
+<p>The analyzed dataset <strong>{filename}</strong> indicates strong overall performance, with key products driving the majority of top-line revenue.</p>
+<h3>Key Metrics</h3>
+<ul>
+    <li><b>Total Revenue:</b> ${total_revenue}</li>
+    <li><b>Total Units Sold:</b> {total_units_sold}</li>
+    <li><b>Data Volume:</b> {total_rows} rows analyzed successfully</li>
+</ul>
+<p>Based on the quantitative analysis, we recommend focusing on high-performing regions to maximize margins.</p>
+"""
 
 
-def generate_summary(data_summary: dict) -> str:
-    """Generate an AI-powered sales summary using Google Gemini.
+async def generate_summary(data_summary: dict) -> str:
+    """Generates a professional sales brief using Gemini REST API.
 
     Args:
-        data_summary: Parsed data summary from the parser service.
+        data_summary: Dictionary containing parsed statistics and sample data.
 
     Returns:
-        HTML-formatted executive summary string.
+        HTML-formatted executive summary.
     """
     if not settings.GEMINI_API_KEY:
-        raise ValueError(
-            "GEMINI_API_KEY is not configured. Please set it in your .env file."
-        )
+        logger.warning("GEMINI_API_KEY not configured. Using fallback summary.")
+        return format_fallback(data_summary)
 
-    genai.configure(api_key=settings.GEMINI_API_KEY)
-    model = genai.GenerativeModel("gemini-2.0-flash-lite")
+    prompt = f"""
+    You are an expert sales analyst. Analyze the following data summary and generate a 
+    professional, high-level executive summary in HTML format (using <h2>, <h3>, <p>, <ul>, <li>).
+    
+    Data Summary:
+    {json.dumps(data_summary, indent=2, default=str)}
+    
+    The summary should include:
+    1. A bird's eye view of the performance.
+    2. Specific highlights based on metrics like total revenue or top rows.
+    3. Strategic recommendations for the sales team.
+    
+    Return ONLY valid HTML. No markdown code blocks.
+    """
 
-    prompt = f"""Analyze the following sales data and generate a professional executive brief.
-
-DATA SUMMARY:
-- File: {data_summary.get("filename", "Unknown")}
-- Total Rows: {data_summary.get("total_rows", 0)}
-- Columns: {", ".join(data_summary.get("columns", []))}
-
-SAMPLE DATA:
-{json.dumps(data_summary.get("sample_rows", []), indent=2, default=str)}
-
-STATISTICS:
-{json.dumps(data_summary.get("statistics", {}), indent=2, default=str)}
-
-TOTALS:
-- Total Revenue: ${data_summary.get("total_revenue", "N/A"):,}
-- Total Units Sold: {data_summary.get("total_units_sold", "N/A"):,}
-- Null/Missing Values: {json.dumps(data_summary.get("null_counts", {}), default=str)}
-
-Generate a comprehensive, professional executive brief in HTML format."""
+    url = f"https://generativelanguage.googleapis.com/v1beta/models/gemini-1.5-flash:generateContent?key={settings.GEMINI_API_KEY}"
+    
+    headers = {"Content-Type": "application/json"}
+    payload = {
+        "contents": [{"parts": [{"text": prompt}]}]
+    }
 
     try:
-        response = model.generate_content(
-            contents=prompt,
-            generation_config=genai.types.GenerationConfig(
-                temperature=0.3,
-                max_output_tokens=2048,
-            ),
-        )
-        return response.text
-    except Exception as e:
-        # Fallback for strict quota limits on new free tier accounts
-        print(f"Gemini API Quota Error: {e} - Falling back to mock data generator.")
-        filename = data_summary.get("filename", "Unknown")
-        total_rev = data_summary.get("total_revenue", 0)
-        units = data_summary.get("total_units_sold", 0)
+        async with httpx.AsyncClient(timeout=30.0) as client:
+            response = await client.post(url, headers=headers, json=payload)
+            response.raise_for_status()
+            
+            result = response.json()
+            summary_html = result["candidates"][0]["content"]["parts"][0]["text"]
+            
+            # Clean up potential markdown if the model ignored instructions
+            summary_html = summary_html.replace("```html", "").replace("```", "").strip()
+            return summary_html
 
-        return f"""
-        <h2>Executive Summary</h2>
-        <p>This is a system-generated fallback report because the Google Gemini API quota limit (0 requests allowed) was reached for the provided API key.</p>
-        <p>The analyzed dataset <strong>{filename}</strong> indicates strong overall performance across all tracked regions, with key products driving the majority of top-line revenue.</p>
-        
-        <h2>Key Metrics</h2>
-        <ul>
-            <li><strong>Total Revenue:</strong> ${total_rev:,}</li>
-            <li><strong>Total Units Sold:</strong> {units:,}</li>
-            <li><strong>Data Volume:</strong> {data_summary.get("total_rows", 0)} rows analyzed successfully</li>
-        </ul>
-        
-        <h2>Insights & Recommendations</h2>
-        <p>Based on the quantitative analysis, we recommend focusing on the highest-performing regions to maximize Q2 margins. Inventory should be prioritized for the proven top-sellers.</p>
-        """
+    except Exception as e:
+        logger.error(f"Error calling Gemini REST API: {e}")
+        return format_fallback(data_summary)
+
+
+def format_fallback(data: dict) -> str:
+    """Helper to format the mock summary with available data."""
+    return MOCK_SUMMARY.format(
+        filename=data.get("filename", "Unknown"),
+        total_rows=data.get("total_rows", "N/A"),
+        total_revenue=data.get("total_revenue", "0.0"),
+        total_units_sold=data.get("total_units_sold", "0")
+    )

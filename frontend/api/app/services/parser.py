@@ -1,11 +1,12 @@
-"""Data parser service: reads CSV/XLSX files and produces structured summaries."""
+"""Data parser service: reads CSV/XLSX files and produces structured summaries without heavy dependencies."""
 
 import io
-import pandas as pd
+import csv
+from openpyxl import load_workbook
 
 
 def parse_file(contents: bytes, filename: str) -> dict:
-    """Parse uploaded file into a structured data summary for the AI engine.
+    """Parse uploaded file into a structured data summary without Pandas.
 
     Args:
         contents: Raw file bytes.
@@ -15,45 +16,60 @@ def parse_file(contents: bytes, filename: str) -> dict:
         Dictionary with parsed data summary.
     """
     ext = filename.rsplit(".", 1)[-1].lower()
+    
+    rows = []
+    headers = []
 
     if ext == "csv":
-        df = pd.read_csv(io.BytesIO(contents))
+        stream = io.StringIO(contents.decode("utf-8", errors="ignore"))
+        reader = csv.DictReader(stream)
+        headers = reader.fieldnames or []
+        rows = list(reader)
     elif ext == "xlsx":
-        df = pd.read_excel(io.BytesIO(contents), engine="openpyxl")
+        wb = load_workbook(io.BytesIO(contents), data_only=True)
+        sheet = wb.active
+        # Convert sheet to list of dicts
+        for i, row in enumerate(sheet.iter_rows(values_only=True)):
+            if i == 0:
+                headers = [str(cell) if cell is not None else f"Col_{j}" for j, cell in enumerate(row)]
+            else:
+                rows.append(dict(zip(headers, row)))
     else:
         raise ValueError(f"Unsupported file extension: .{ext}")
 
     # Build a comprehensive summary for the AI
     summary = {
         "filename": filename,
-        "total_rows": len(df),
-        "total_columns": len(df.columns),
-        "columns": list(df.columns),
-        "data_types": {col: str(dtype) for col, dtype in df.dtypes.items()},
-        "sample_rows": df.head(10).to_dict(orient="records"),
+        "total_rows": len(rows),
+        "total_columns": len(headers),
+        "columns": headers,
+        "sample_rows": rows[:10],
         "statistics": {},
-        "null_counts": df.isnull().sum().to_dict(),
     }
 
-    # Numeric statistics
-    numeric_cols = df.select_dtypes(include=["number"]).columns
-    if len(numeric_cols) > 0:
-        stats = df[numeric_cols].describe().to_dict()
-        summary["statistics"]["numeric"] = {
-            col: {k: round(v, 2) for k, v in stat.items()}
-            for col, stat in stats.items()
-        }
+    # Basic statistics and revenue aggregation
+    total_revenue = 0.0
+    total_units_sold = 0
+    has_revenue = "Revenue" in headers
+    has_units = "Units_Sold" in headers
 
-    # Categorical breakdowns
-    cat_cols = df.select_dtypes(include=["object"]).columns
-    for col in cat_cols:
-        if df[col].nunique() <= 20:
-            summary["statistics"][col] = df[col].value_counts().to_dict()
+    for row in rows:
+        if has_revenue:
+            try:
+                val = float(str(row.get("Revenue", 0)).replace("$", "").replace(",", ""))
+                total_revenue += val
+            except (ValueError, TypeError):
+                pass
+        if has_units:
+            try:
+                val = int(float(str(row.get("Units_Sold", 0)).replace(",", "")))
+                total_units_sold += val
+            except (ValueError, TypeError):
+                pass
 
-    # Revenue/aggregation insights
-    if "Revenue" in df.columns:
-        summary["total_revenue"] = round(float(df["Revenue"].sum()), 2)
-    if "Units_Sold" in df.columns:
-        summary["total_units_sold"] = int(df["Units_Sold"].sum())
+    if has_revenue:
+        summary["total_revenue"] = round(total_revenue, 2)
+    if has_units:
+        summary["total_units_sold"] = total_units_sold
 
     return summary
