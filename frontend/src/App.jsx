@@ -121,7 +121,7 @@ function App() {
           <div className="navbar-logo">R</div>
           <div>
             <div className="navbar-title">Rabbitt AI</div>
-            <div className="navbar-subtitle">Sales Insight Automator</div>
+            <div className="navbar-subtitle">Sales Insight Automator Pro</div>
           </div>
         </div>
         <span className="navbar-badge">● Online</span>
@@ -131,7 +131,7 @@ function App() {
       <main className="main-content">
         <div className="hero">
           <span className="hero-icon">📊</span>
-          <h1>Sales Insight Automator</h1>
+          <h1>Sales Insight Automator Pro</h1>
           <p>
             Upload your sales data and receive an AI-powered executive brief
             delivered directly to your inbox within seconds.
