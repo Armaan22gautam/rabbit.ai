@@ -35,7 +35,7 @@ async def lifespan(app: FastAPI):
 
 
 app = FastAPI(
-    title="Rabbitt AI — Sales Insight Automator",
+    title="Rabbitt AI — Sales Insight Automator Pro",
     description=(
         "Upload sales data (CSV/XLSX) and receive an AI-generated executive summary "
         "delivered directly to your inbox.\n\n"
