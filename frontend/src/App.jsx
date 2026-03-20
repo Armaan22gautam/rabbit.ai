@@ -272,7 +272,7 @@ function App() {
       {/* Footer */}
       <footer className="footer">
         <p>
-          Built with ❤️ by <a href="#" id="footer-link">Rabbitt AI Engineering</a> ·
+          Built with ❤️ by <a href="#" id="footer-link">Rabbitt AI Engineering Team</a> ·
           Powered by Google Gemini ·{' '}
           <a href={`${API_BASE}/docs`} target="_blank" rel="noreferrer" id="swagger-link">
             API Docs ↗
