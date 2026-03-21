@@ -55,6 +55,7 @@ async def analyze_sales_data(
 
     try:
         # Step 1: Parse the data
+        logger.info("Starting to parse data file")
         data_summary = parse_file(contents, file.filename)
         logger.info(f"Parsed {data_summary['total_rows']} rows from {file.filename}")
 
