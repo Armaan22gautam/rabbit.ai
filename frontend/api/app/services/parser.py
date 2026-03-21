@@ -37,7 +37,7 @@ def parse_file(contents: bytes, filename: str) -> dict:
     else:
         raise ValueError(f"Unsupported file extension: .{ext}")
 
-    # Build a comprehensive summary for the AI
+    # Build a comprehensive summary dictionary for the AI model
     summary = {
         "filename": filename,
         "total_rows": len(rows),
