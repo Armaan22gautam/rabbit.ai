@@ -5,6 +5,7 @@ import httpx
 import logging
 from app.config import settings
 
+# Initialize modular logger for AI operations
 logger = logging.getLogger(__name__)
 
 # Fallback summary in case of API issues
