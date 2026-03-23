@@ -124,7 +124,7 @@ function App() {
             <div className="navbar-subtitle">Sales Insight Automator Pro</div>
           </div>
         </div>
-        <span className="navbar-badge">● Online</span>
+        <span className="navbar-badge">● System Online</span>
       </nav>
 
       {/* Main */}
