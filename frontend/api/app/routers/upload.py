@@ -10,7 +10,7 @@ from app.services.email_service import send_email
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(prefix="/api/v1", tags=["Sales Analysis"])
+router = APIRouter(prefix="/api/v1", tags=["Sales Data Analysis"])
 
 
 @router.post(
