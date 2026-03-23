@@ -8,7 +8,7 @@ from app.config import settings
 # Initialize modular logger for AI operations
 logger = logging.getLogger(__name__)
 
-# Fallback summary in case of API issues
+# Fallback HTML summary to use in case of API issues or rate limits
 MOCK_SUMMARY = """
 <h2>Executive Summary</h2>
 <p>This is a system-generated fallback report because the Google Gemini API quota limit was reached or a connection error occurred.</p>
