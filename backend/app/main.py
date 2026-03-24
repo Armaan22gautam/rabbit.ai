@@ -86,6 +86,7 @@ async def global_exception_handler(request: Request, exc: Exception):
 
 
 # Health check
+# API Health check endpoint
 @app.get(
     "/health",
     tags=["System"],
