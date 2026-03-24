@@ -121,7 +121,7 @@ function App() {
           <div className="navbar-logo">R</div>
           <div>
             <div className="navbar-title">Rabbitt AI</div>
-            <div className="navbar-subtitle">Sales Insight Automator Pro</div>
+            <div className="navbar-subtitle">Sales Insight Automator</div>
           </div>
         </div>
         <span className="navbar-badge">● System Online</span>
