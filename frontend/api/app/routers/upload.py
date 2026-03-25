@@ -1,6 +1,7 @@
 """Upload router: handles file upload, AI analysis, and email delivery."""
 
 import logging
+from datetime import datetime
 from fastapi import APIRouter, Depends, File, Form, UploadFile
 from pydantic import EmailStr
 from app.middleware.security import verify_api_key, validate_file, validate_file_size
@@ -73,6 +74,7 @@ async def analyze_sales_data(
             "filename": file.filename,
             "rows_analyzed": data_summary["total_rows"],
             "columns": data_summary["columns"],
+            "generated_at": datetime.utcnow().isoformat() + "Z",
             "summary_preview": ai_summary[:500] + "..."
             if len(ai_summary) > 500
             else ai_summary,
