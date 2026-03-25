@@ -274,6 +274,7 @@ function App() {
         <p>
           Built with ❤️ by <a href="#" id="footer-link">Rabbitt AI Engineering Team</a> ·
           Powered by Google Gemini ·{' '}
+          <span className="footer-version">v1.1.0</span> ·{' '}
           <a href={`${API_BASE}/docs`} target="_blank" rel="noreferrer" id="swagger-link">
             API Docs ↗
           </a>
