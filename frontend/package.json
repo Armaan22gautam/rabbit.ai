@@ -1,5 +1,6 @@
 {
   "name": "sales-insight-automator",
+  "description": "Sales Insight Automator Pro frontend",
   "private": true,
   "version": "1.0.0",
   "type": "module",
