@@ -1,4 +1,4 @@
-# 🐰 Rabbitt AI — Sales Insight Automator Pro
+# 🐰 Rabbitt AI — Sales Insight Automator v1.0.1
 
 > Upload sales data (CSV/XLSX) → Get an AI-generated executive brief → Delivered to your inbox in seconds.
 

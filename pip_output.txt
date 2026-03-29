@@ -1,0 +1,76 @@
+﻿Requirement already satisfied: fastapi>=0.115.0 in d:\rabbit.ai\backend\venv\lib\site-packages (from -r requirements.txt (line 1)) (0.135.1)
+Requirement already satisfied: uvicorn>=0.30.0 in d:\rabbit.ai\backend\venv\lib\site-packages (from uvicorn[standard]>=0.30.0->-r requirements.txt (line 2)) (0.41.0)
+Requirement already satisfied: python-multipart>=0.0.9 in d:\rabbit.ai\backend\venv\lib\site-packages (from -r requirements.txt (line 3)) (0.0.22)
+Requirement already satisfied: pandas>=2.2.0 in d:\rabbit.ai\backend\venv\lib\site-packages (from -r requirements.txt (line 4)) (3.0.1)
+Requirement already satisfied: openpyxl>=3.1.0 in d:\rabbit.ai\backend\venv\lib\site-packages (from -r requirements.txt (line 5)) (3.1.5)
+Requirement already satisfied: google-generativeai>=0.8.0 in d:\rabbit.ai\backend\venv\lib\site-packages (from -r requirements.txt (line 6)) (0.8.6)
+Requirement already satisfied: python-dotenv>=1.0.0 in d:\rabbit.ai\backend\venv\lib\site-packages (from -r requirements.txt (line 7)) (1.2.2)
+Requirement already satisfied: slowapi>=0.1.9 in d:\rabbit.ai\backend\venv\lib\site-packages (from -r requirements.txt (line 8)) (0.1.9)
+Requirement already satisfied: pydantic>=2.10.0 in d:\rabbit.ai\backend\venv\lib\site-packages (from pydantic[email]>=2.10.0->-r requirements.txt (line 9)) (2.12.5)
+Requirement already satisfied: jinja2>=3.1.0 in d:\rabbit.ai\backend\venv\lib\site-packages (from -r requirements.txt (line 10)) (3.1.6)
+Requirement already satisfied: starlette>=0.46.0 in d:\rabbit.ai\backend\venv\lib\site-packages (from fastapi>=0.115.0->-r requirements.txt (line 1)) (0.52.1)
+Requirement already satisfied: typing-extensions>=4.8.0 in d:\rabbit.ai\backend\venv\lib\site-packages (from fastapi>=0.115.0->-r requirements.txt (line 1)) (4.15.0)
+Requirement already satisfied: typing-inspection>=0.4.2 in d:\rabbit.ai\backend\venv\lib\site-packages (from fastapi>=0.115.0->-r requirements.txt (line 1)) (0.4.2)
+Requirement already satisfied: annotated-doc>=0.0.2 in d:\rabbit.ai\backend\venv\lib\site-packages (from fastapi>=0.115.0->-r requirements.txt (line 1)) (0.0.4)
+Requirement already satisfied: click>=7.0 in d:\rabbit.ai\backend\venv\lib\site-packages (from uvicorn>=0.30.0->uvicorn[standard]>=0.30.0->-r requirements.txt (line 2)) (8.3.1)
+Requirement already satisfied: h11>=0.8 in d:\rabbit.ai\backend\venv\lib\site-packages (from uvicorn>=0.30.0->uvicorn[standard]>=0.30.0->-r requirements.txt (line 2)) (0.16.0)
+Requirement already satisfied: numpy>=1.26.0 in d:\rabbit.ai\backend\venv\lib\site-packages (from pandas>=2.2.0->-r requirements.txt (line 4)) (2.4.3)
+Requirement already satisfied: python-dateutil>=2.8.2 in d:\rabbit.ai\backend\venv\lib\site-packages (from pandas>=2.2.0->-r requirements.txt (line 4)) (2.9.0.post0)
+Requirement already satisfied: tzdata in d:\rabbit.ai\backend\venv\lib\site-packages (from pandas>=2.2.0->-r requirements.txt (line 4)) (2025.3)
+Requirement already satisfied: et-xmlfile in d:\rabbit.ai\backend\venv\lib\site-packages (from openpyxl>=3.1.0->-r requirements.txt (line 5)) (2.0.0)
+Requirement already satisfied: google-ai-generativelanguage==0.6.15 in d:\rabbit.ai\backend\venv\lib\site-packages (from google-generativeai>=0.8.0->-r requirements.txt (line 6)) (0.6.15)
+Requirement already satisfied: google-api-core in d:\rabbit.ai\backend\venv\lib\site-packages (from google-generativeai>=0.8.0->-r requirements.txt (line 6)) (2.30.0)
+Requirement already satisfied: google-api-python-client in d:\rabbit.ai\backend\venv\lib\site-packages (from google-generativeai>=0.8.0->-r requirements.txt (line 6)) (2.192.0)
+Requirement already satisfied: google-auth>=2.15.0 in d:\rabbit.ai\backend\venv\lib\site-packages (from google-generativeai>=0.8.0->-r requirements.txt (line 6)) (2.49.0)
+Requirement already satisfied: protobuf in d:\rabbit.ai\backend\venv\lib\site-packages (from google-generativeai>=0.8.0->-r requirements.txt (line 6)) (5.29.6)
+Requirement already satisfied: tqdm in d:\rabbit.ai\backend\venv\lib\site-packages (from google-generativeai>=0.8.0->-r requirements.txt (line 6)) (4.67.3)
+Requirement already satisfied: proto-plus<2.0.0dev,>=1.22.3 in d:\rabbit.ai\backend\venv\lib\site-packages (from google-ai-generativelanguage==0.6.15->google-generativeai>=0.8.0->-r requirements.txt (line 6)) (1.27.1)
+Requirement already satisfied: googleapis-common-protos<2.0.0,>=1.56.3 in d:\rabbit.ai\backend\venv\lib\site-packages (from google-api-core->google-generativeai>=0.8.0->-r requirements.txt (line 6)) (1.73.0)
+Requirement already satisfied: requests<3.0.0,>=2.20.0 in d:\rabbit.ai\backend\venv\lib\site-packages (from google-api-core->google-generativeai>=0.8.0->-r requirements.txt (line 6)) (2.32.5)
+Requirement already satisfied: grpcio<2.0.0,>=1.33.2 in d:\rabbit.ai\backend\venv\lib\site-packages (from google-api-core[grpc]!=2.0.*,!=2.1.*,!=2.10.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,!=2.8.*,!=2.9.*,<3.0.0dev,>=1.34.1->google-ai-generativelanguage==0.6.15->google-generativeai>=0.8.0->-r requirements.txt (line 6)) (1.78.0)
+Requirement already satisfied: grpcio-status<2.0.0,>=1.33.2 in d:\rabbit.ai\backend\venv\lib\site-packages (from google-api-core[grpc]!=2.0.*,!=2.1.*,!=2.10.*,!=2.2.*,!=2.3.*,!=2.4.*,!=2.5.*,!=2.6.*,!=2.7.*,!=2.8.*,!=2.9.*,<3.0.0dev,>=1.34.1->google-ai-generativelanguage==0.6.15->google-generativeai>=0.8.0->-r requirements.txt (line 6)) (1.71.2)
+Requirement already satisfied: pyasn1-modules>=0.2.1 in d:\rabbit.ai\backend\venv\lib\site-packages (from google-auth>=2.15.0->google-generativeai>=0.8.0->-r requirements.txt (line 6)) (0.4.2)
+Requirement already satisfied: cryptography>=38.0.3 in d:\rabbit.ai\backend\venv\lib\site-packages (from google-auth>=2.15.0->google-generativeai>=0.8.0->-r requirements.txt (line 6)) (46.0.5)
+Requirement already satisfied: rsa<5,>=3.1.4 in d:\rabbit.ai\backend\venv\lib\site-packages (from google-auth>=2.15.0->google-generativeai>=0.8.0->-r requirements.txt (line 6)) (4.9.1)
+Requirement already satisfied: charset_normalizer<4,>=2 in d:\rabbit.ai\backend\venv\lib\site-packages (from requests<3.0.0,>=2.20.0->google-api-core->google-generativeai>=0.8.0->-r requirements.txt (line 6)) (3.4.5)
+Requirement already satisfied: idna<4,>=2.5 in d:\rabbit.ai\backend\venv\lib\site-packages (from requests<3.0.0,>=2.20.0->google-api-core->google-generativeai>=0.8.0->-r requirements.txt (line 6)) (3.11)
+Requirement already satisfied: urllib3<3,>=1.21.1 in d:\rabbit.ai\backend\venv\lib\site-packages (from requests<3.0.0,>=2.20.0->google-api-core->google-generativeai>=0.8.0->-r requirements.txt (line 6)) (2.6.3)
+Requirement already satisfied: certifi>=2017.4.17 in d:\rabbit.ai\backend\venv\lib\site-packages (from requests<3.0.0,>=2.20.0->google-api-core->google-generativeai>=0.8.0->-r requirements.txt (line 6)) (2026.2.25)
+Requirement already satisfied: pyasn1>=0.1.3 in d:\rabbit.ai\backend\venv\lib\site-packages (from rsa<5,>=3.1.4->google-auth>=2.15.0->google-generativeai>=0.8.0->-r requirements.txt (line 6)) (0.6.2)
+Requirement already satisfied: limits>=2.3 in d:\rabbit.ai\backend\venv\lib\site-packages (from slowapi>=0.1.9->-r requirements.txt (line 8)) (5.8.0)
+Requirement already satisfied: annotated-types>=0.6.0 in d:\rabbit.ai\backend\venv\lib\site-packages (from pydantic>=2.10.0->pydantic[email]>=2.10.0->-r requirements.txt (line 9)) (0.7.0)
+Requirement already satisfied: pydantic-core==2.41.5 in d:\rabbit.ai\backend\venv\lib\site-packages (from pydantic>=2.10.0->pydantic[email]>=2.10.0->-r requirements.txt (line 9)) (2.41.5)
+Requirement already satisfied: MarkupSafe>=2.0 in d:\rabbit.ai\backend\venv\lib\site-packages (from jinja2>=3.1.0->-r requirements.txt (line 10)) (3.0.3)
+Requirement already satisfied: colorama in d:\rabbit.ai\backend\venv\lib\site-packages (from click>=7.0->uvicorn>=0.30.0->uvicorn[standard]>=0.30.0->-r requirements.txt (line 2)) (0.4.6)
+Requirement already satisfied: cffi>=2.0.0 in d:\rabbit.ai\backend\venv\lib\site-packages (from cryptography>=38.0.3->google-auth>=2.15.0->google-generativeai>=0.8.0->-r requirements.txt (line 6)) (2.0.0)
+Requirement already satisfied: pycparser in d:\rabbit.ai\backend\venv\lib\site-packages (from cffi>=2.0.0->cryptography>=38.0.3->google-auth>=2.15.0->google-generativeai>=0.8.0->-r requirements.txt (line 6)) (3.0)
+Requirement already satisfied: deprecated>=1.2 in d:\rabbit.ai\backend\venv\lib\site-packages (from limits>=2.3->slowapi>=0.1.9->-r requirements.txt (line 8)) (1.3.1)
+Requirement already satisfied: packaging>=21 in d:\rabbit.ai\backend\venv\lib\site-packages (from limits>=2.3->slowapi>=0.1.9->-r requirements.txt (line 8)) (26.0)
+Requirement already satisfied: wrapt<3,>=1.10 in d:\rabbit.ai\backend\venv\lib\site-packages (from deprecated>=1.2->limits>=2.3->slowapi>=0.1.9->-r requirements.txt (line 8)) (2.1.2)
+Requirement already satisfied: email-validator>=2.0.0 in d:\rabbit.ai\backend\venv\lib\site-packages (from pydantic[email]>=2.10.0->-r requirements.txt (line 9)) (2.3.0)
+Requirement already satisfied: dnspython>=2.0.0 in d:\rabbit.ai\backend\venv\lib\site-packages (from email-validator>=2.0.0->pydantic[email]>=2.10.0->-r requirements.txt (line 9)) (2.8.0)
+Requirement already satisfied: six>=1.5 in d:\rabbit.ai\backend\venv\lib\site-packages (from python-dateutil>=2.8.2->pandas>=2.2.0->-r requirements.txt (line 4)) (1.17.0)
+Requirement already satisfied: anyio<5,>=3.6.2 in d:\rabbit.ai\backend\venv\lib\site-packages (from starlette>=0.46.0->fastapi>=0.115.0->-r requirements.txt (line 1)) (4.12.1)
+Requirement already satisfied: httptools>=0.6.3 in d:\rabbit.ai\backend\venv\lib\site-packages (from uvicorn[standard]>=0.30.0->-r requirements.txt (line 2)) (0.7.1)
+Requirement already satisfied: pyyaml>=5.1 in d:\rabbit.ai\backend\venv\lib\site-packages (from uvicorn[standard]>=0.30.0->-r requirements.txt (line 2)) (6.0.3)
+Requirement already satisfied: watchfiles>=0.20 in d:\rabbit.ai\backend\venv\lib\site-packages (from uvicorn[standard]>=0.30.0->-r requirements.txt (line 2)) (1.1.1)
+Requirement already satisfied: websockets>=10.4 in d:\rabbit.ai\backend\venv\lib\site-packages (from uvicorn[standard]>=0.30.0->-r requirements.txt (line 2)) (16.0)
+Requirement already satisfied: httplib2<1.0.0,>=0.19.0 in d:\rabbit.ai\backend\venv\lib\site-packages (from google-api-python-client->google-generativeai>=0.8.0->-r requirements.txt (line 6)) (0.31.2)
+Requirement already satisfied: google-auth-httplib2<1.0.0,>=0.2.0 in d:\rabbit.ai\backend\venv\lib\site-packages (from google-api-python-client->google-generativeai>=0.8.0->-r requirements.txt (line 6)) (0.3.0)
+Requirement already satisfied: uritemplate<5,>=3.0.1 in d:\rabbit.ai\backend\venv\lib\site-packages (from google-api-python-client->google-generativeai>=0.8.0->-r requirements.txt (line 6)) (4.2.0)
+Requirement already satisfied: pyparsing<4,>=3.1 in d:\rabbit.ai\backend\venv\lib\site-packages (from httplib2<1.0.0,>=0.19.0->google-api-python-client->google-generativeai>=0.8.0->-r requirements.txt (line 6)) (3.3.2)
+d:\rabbit.ai\backend\venv\Scripts\pip.exe : 
+At line:1 char:1
++ d:\rabbit.ai\backend\venv\Scripts\pip.exe install 
+-r requirements.txt ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (:String) 
+    [], RemoteException
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+[notice] A new release of pip is available: 25.1.1 -> 
+26.0.1
+[notice] To update, run: 
+D:\rabbit.ai\backend\venv\Scripts\python.exe -m pip 
+install --upgrade pip

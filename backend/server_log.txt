@@ -1,0 +1,43 @@
+﻿d:\rabbit.ai\backend\venv\Scripts\python.exe : 
+D:\rabbit.ai\backend\app\services\ai_engine.py:4: 
+FutureWarning: 
+At line:1 char:1
++ d:\rabbit.ai\backend\venv\Scripts\python.exe -m uvicorn 
+app.main:app  ...
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~
+    + CategoryInfo          : NotSpecified: (D:\rabbi    
+t.ai\ba...FutureWarning: :String) [], RemoteExcep    tion
+    + FullyQualifiedErrorId : NativeCommandError
+ 
+
+All support for the `google.generativeai` package has 
+ended. It will no longer be receiving 
+updates or bug fixes. Please switch to the `google.genai` 
+package as soon as possible.
+See README for more details:
+
+https://github.com/google-gemini/deprecated-generative-ai-p
+ython/blob/main/README.md
+
+  import google.generativeai as genai
+INFO:     Started server process [14044]
+INFO:     Waiting for application startup.
+2026-03-11 17:11:50,361 | INFO     | app.main | \U0001f680 
+Sales Insight Automator starting up...
+2026-03-11 17:11:50,364 | INFO     | app.main |    CORS 
+origins: ['http://localhost:5173', 'http://localhost:3000']
+2026-03-11 17:11:50,364 | INFO     | app.main |    API Key 
+required: True
+2026-03-11 17:11:50,365 | INFO     | app.main |    Gemini 
+configured: True
+2026-03-11 17:11:50,365 | INFO     | app.main |    SMTP 
+configured: True
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press 
+CTRL+C to quit)
+INFO:     127.0.0.1:62725 - "POST /api/v1/analyze HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:62909 - "POST /api/v1/analyze HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:62246 - "POST /api/v1/analyze HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:51716 - "POST /api/v1/analyze HTTP/1.1" 401 Unauthorized
+INFO:     127.0.0.1:56193 - "POST /api/v1/analyze HTTP/1.1" 401 Unauthorized

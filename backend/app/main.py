@@ -48,7 +48,7 @@ app = FastAPI(
         "## Authentication\n"
         "If an API key is configured, include it in the `X-API-Key` header."
     ),
-    version="1.0.0",
+    version="1.0.1",
     docs_url="/docs",
     redoc_url="/redoc",
     openapi_url="/openapi.json",
